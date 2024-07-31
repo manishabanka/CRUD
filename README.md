@@ -1,46 +1,55 @@
-# Getting Started with Create React App and Redux
+# Customer Management CRUD Application
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) template.
+This project is a simple Customer Management CRUD application built using React.js with JavaScript and Redux for state management. The application allows you to add, edit, delete, and view customer data, with validation and API integration for specific fields.
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+- **Customer Form**: Add and edit customer details.
+  - **PAN**: Required, valid PAN format for India, max length 10.
+  - **Full Name**: Required, max length 140.
+  - **Email**: Required, max length 255, valid format.
+  - **Mobile Number**: Required, valid format, max length 10 with static prefix +91.
+  - **Addresses**: Multiple addresses (max 10).
 
-### `npm start`
+- **Customer List**: View all added customers with options to edit and delete.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- **PAN Verification**: Verifies PAN via an API.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- **Postcode Lookup**: Fetches city and state via an API based on the postcode.
 
-### `npm test`
+- **State Management**: Uses Redux for managing the application state.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Installation
 
-### `npm run build`
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/manishabanka/CRUD.git
+   cd CRUD
+   cd customer-crud-app
+   ```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+3. Start the application:
+   ```bash
+   npm start
+   ```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Usage
 
-### `npm run eject`
+1. **Add a Customer**: Navigate to the Customer Form page, fill in the details, and click 'Submit'. The customer will be displayed on the Customer List page.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+2. **Edit a Customer**: On the Customer List page, click the 'Edit' button next to a customer. Update the details in the form and submit to save changes.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+3. **Delete a Customer**: On the Customer List page, click the 'Delete' button next to a customer to remove them from the list. 
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## API Integration
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+- **PAN Verification API**: Used to validate the PAN field.
+- **Postcode Lookup API**: Used to fetch city and state based on the postcode.
 
-## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
