@@ -10,8 +10,6 @@ const editControllerSlice = createSlice({
   reducers: {
     makeEditTrueFalse: (state, action) => {
       return { ...state, isEdit: action.payload };
-      // console.log("make it true", state.edit);
-      // console.log(action.payload, state.edit);
     },
   },
 });

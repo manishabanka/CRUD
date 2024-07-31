@@ -10,6 +10,7 @@ import { makeEditTrueFalse } from "./editControllerSlice";
 import * as Style from "./CustomerForm.styled";
 import { Button, Label, TextInput } from "flowbite-react";
 
+// Define validation schema using yup
 const schema = yup.object().shape({
   PAN: yup
     .string()
@@ -50,6 +51,8 @@ const CustomerForm = ({ existingCustomer }) => {
   const navigate = useNavigate();
   const edit = useSelector((state) => state.edit.isEdit);
   console.log(edit);
+
+  // Initialize useForm with default values and validation schema
   const {
     register,
     handleSubmit,
@@ -84,21 +87,24 @@ const CustomerForm = ({ existingCustomer }) => {
   const [loadingPAN, setLoadingPAN] = useState(false);
   const [loadingPostcode, setLoadingPostcode] = useState(false);
 
+  // Handle form submission
   const onSubmit = (data) => {
     if (existingCustomer) {
-      dispatch(updateCustomer(data));
+      dispatch(updateCustomer(data)); 
       dispatch(makeEditTrueFalse(false));
 
-      navigate("/");
+      navigate("/list");
     } else {
-      dispatch(addCustomer(data));
+      dispatch(addCustomer(data)); 
       dispatch(makeEditTrueFalse(false));
-      navigate("/");
+      navigate("/list");
     }
   };
 
   useEffect(() => {
+    // Watch for changes in form fields
     const subscription = watch((value, { name }) => {
+      // Handle PAN verification
       if (name === "PAN" && value.PAN.length === 10) {
         setLoadingPAN(true);
         axios
@@ -107,12 +113,13 @@ const CustomerForm = ({ existingCustomer }) => {
           })
           .then((response) => {
             if (response.data.isValid) {
-              setValue("fullName", response.data.fullName);
+              setValue("fullName", response.data.fullName); 
             }
           })
           .catch((error) => console.error(error))
           .finally(() => setLoadingPAN(false));
       }
+      // Handle postcode lookup
       if (
         name?.includes("postcode") &&
         value.addresses.some((addr) => addr.postcode.length === 6)
@@ -125,14 +132,13 @@ const CustomerForm = ({ existingCustomer }) => {
             postcode,
           })
           .then((response) => {
-            setValue(`addresses.${index}.city`, response.data.city[0].name);
-            setValue(`addresses.${index}.state`, response.data.state[0].name);
+            setValue(`addresses.${index}.city`, response.data.city[0].name); 
+            setValue(`addresses.${index}.state`, response.data.state[0].name); 
           })
           .catch((error) => console.error(error))
           .finally(() => setLoadingPostcode(false));
       }
     });
-
     return () => subscription.unsubscribe();
   }, [watch, setValue]);
 

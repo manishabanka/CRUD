@@ -1,9 +1,8 @@
-// src/features/customers/CustomerList.js
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteCustomer } from "./customerSlice";
 import { makeEditTrueFalse } from "./editControllerSlice";
-import { Button } from "flowbite-react";
+import { Button, Card } from "flowbite-react";
 import CustomerForm from "./CustomerForm";
 import { Link } from "react-router-dom";
 import * as Style from "./CustomerList.styled";
@@ -14,13 +13,13 @@ const CustomerList = () => {
   const customers = useSelector((state) => state.customers.customers);
   const edit = useSelector((state) => state.edit.isEdit);
 
-  console.log("edit", edit);
-
+  // Handle Edit functionality
   const handleEdit = (customer) => {
     setEditingCustomer(customer);
     dispatch(makeEditTrueFalse(true));
   };
 
+  // Handle Delete functionality
   const handleDelete = (PAN) => {
     dispatch(deleteCustomer({ PAN }));
   };
@@ -33,8 +32,13 @@ const CustomerList = () => {
         <Style.Content>
           <Style.List>
             <Style.Heading>Customer List</Style.Heading>
+            <Link to={"/addNew"}>
+              <Button color="blue">Add New Customer</Button>
+            </Link>
+          </Style.List>
+          <Style.Display>
             {customers.map((customer) => (
-              <>
+              <Card>
                 <Style.Details key={customer.PAN}>
                   <Style.Row>
                     <Style.Text>PAN:</Style.Text> {customer.PAN}
@@ -71,18 +75,20 @@ const CustomerList = () => {
                     </div>
                   ))}
                   <Style.Buttons>
-                    <Button color="blue" onClick={() => handleEdit(customer)}>Edit</Button>
-                    <Button color="failure" onClick={() => handleDelete(customer.PAN)}>
+                    <Button color="blue" onClick={() => handleEdit(customer)}>
+                      Edit
+                    </Button>
+                    <Button
+                      color="failure"
+                      onClick={() => handleDelete(customer.PAN)}
+                    >
                       Delete
                     </Button>
                   </Style.Buttons>
                 </Style.Details>
-              </>
+              </Card>
             ))}
-          </Style.List>
-          <Link to={"/addNew"}>
-            <Button color="blue">Add New Customer</Button>
-          </Link>
+          </Style.Display>
         </Style.Content>
       )}
     </Style.Container>

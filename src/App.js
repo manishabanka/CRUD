@@ -15,7 +15,10 @@ function App() {
         <Routes>
           <Route
             path="/"
-            // element={<CustomerForm/>}
+            element={<CustomerForm/>}
+          />
+          <Route
+            path="/list"
             element={<CustomerList setEditingCustomer={setEditingCustomer} />}
           />
           <Route

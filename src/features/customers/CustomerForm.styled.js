@@ -1,12 +1,12 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-padding: 10px;
+padding: 20px;
 `
 export const Heading = styled.div`
 font-family: sans-serif;
 font-weight: 600;
-font-size: 20px;
+font-size: 25px;
 text-decoration-line: underline;
 `
 export const Row = styled.div`
